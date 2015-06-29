@@ -3,8 +3,10 @@
 # is subject to the Rights in Technical Data-Noncommercial Items clause at DFARS 252.227-7013 (FEB 2012)
 
 from django import forms
-from django.forms.widgets import (RadioInput, RadioSelect, CheckboxInput,
-    CheckboxSelectMultiple)
+#OAuth
+#from django.forms.widgets import (RadioInput, RadioSelect, CheckboxInput,
+#   CheckboxSelectMultiple)
+from django.forms.widgets import (RadioSelect, CheckboxInput, CheckboxSelectMultiple)
 from django.contrib.auth.models import User
 from django.utils.html import escape, conditional_escape
 from django.db.models import Max
@@ -12,7 +14,9 @@ from itertools import chain
 from models import AOI, Job, Project
 from maps.models import Layer, MapLayer
 
-no_style = [RadioInput, RadioSelect, CheckboxInput, CheckboxSelectMultiple]
+#OAuth
+#no_style = [RadioInput, RadioSelect, CheckboxInput, CheckboxSelectMultiple]
+no_style = [RadioSelect, CheckboxInput, CheckboxSelectMultiple]
 
 
 class StyledModelForm(forms.ModelForm):

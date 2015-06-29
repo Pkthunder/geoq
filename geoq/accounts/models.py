@@ -114,7 +114,9 @@ class UserAuthorization(models.Model):
     authorized = models.BooleanField(help_text='Check this to approve member access.')
     permissions_granted_by = models.ForeignKey(User, null=True, blank=True,
         related_name='permissions_granted_by')
-    permission_granted_on = models.DateTimeField(auto_now_add=True, default=datetime.now())
+    #permission_granted_on = models.DateTimeField(auto_now_add=True, default=datetime.now())
+    #OAuth
+    permission_granted_on = models.DateTimeField(auto_now_add=True)
     user_accepted_terms_on = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):

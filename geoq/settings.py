@@ -20,10 +20,10 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'geoq',  # Or path to database file if using sqlite3.
+        'NAME': 'oauth',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'geoq',
-        'PASSWORD': 'geoq',
+        'USER': 'oauth',
+        'PASSWORD': 'oauth',
         'HOST': 'localhost',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '5432',  # Set to empty string for default.
     }
@@ -73,7 +73,7 @@ MEDIA_URL = '/images/'
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 STATIC_URL_FOLDER = ''  # Can be set to something like 'geoq-test/' if the app is not run at root level
-STATIC_ROOT = '{0}{1}'.format('/var/www/static/', STATIC_URL_FOLDER)
+STATIC_ROOT = '{0}{1}'.format('/var/oauth/static/', STATIC_URL_FOLDER)
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -204,7 +204,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
-    'south',
+    #'south',
     'django_select2',
     'reversion',
     'easy_thumbnails',
@@ -225,7 +225,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'django.contrib.humanize',
     'django.contrib.staticfiles',
-    'django.contrib.humanize',
+    #'django.contrib.humanize',
 
 
     'compressor',
@@ -238,6 +238,9 @@ INSTALLED_APPS = (
     'debug_toolbar',
 
     'geoq.mgrs',
+
+    #OAuth
+    #'oauth2_provider',
 
 )
 
