@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 
 from django.http import HttpResponse
-from models import Job
+from geoq.core.models import Job
 from geoq.maps.models import FeatureType
 from django.shortcuts import get_object_or_404
 from datetime import datetime

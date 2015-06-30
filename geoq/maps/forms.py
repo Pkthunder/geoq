@@ -15,16 +15,19 @@ class FeatureForm(StyledModelForm):
     class Meta:
         model = Feature
         excluded_fields = ("aoi")
+        exclude = ()
 
 
 class FeatureTypeForm(StyledModelForm):
     class Meta:
         model = FeatureType
+        fields = '__all__'
 
 
 class MapForm(StyledModelForm):
     class Meta:
         model = Map
+        fields = '__all__'
 
 class UploadKMZForm(forms.Form):
     title = forms.CharField(max_length=50)
@@ -34,6 +37,7 @@ class UploadKMZForm(forms.Form):
 class LayerForm(StyledModelForm):
     class Meta:
         model = Layer
+        fields = '__all__'
 
     def __init__(self, *args, **kwargs):
         super(LayerForm, self).__init__(*args, **kwargs)
@@ -77,5 +81,6 @@ class LayerForm(StyledModelForm):
 class MapLayerForm(StyledModelForm):
     class Meta:
         model = MapLayer
+        fields = '__all__'
 
-MapInlineFormset = inlineformset_factory(Map, MapLayer, extra=3)
+MapInlineFormset = inlineformset_factory(Map, MapLayer, extra=3, fields='__all__')

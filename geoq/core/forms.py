@@ -12,7 +12,7 @@ from django.utils.html import escape, conditional_escape
 from django.db.models import Max
 from itertools import chain
 from models import AOI, Job, Project
-from maps.models import Layer, MapLayer
+from geoq.maps.models import Layer, MapLayer
 
 #OAuth
 #no_style = [RadioInput, RadioSelect, CheckboxInput, CheckboxSelectMultiple]

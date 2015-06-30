@@ -18,7 +18,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import DetailView, ListView, TemplateView, View, DeleteView, CreateView, UpdateView
 from datetime import datetime
 
-from models import Project, Job, AOI, Comment, AssigneeType, Organization
+from geoq.core.models import Project, Job, AOI, Comment, AssigneeType, Organization
 from geoq.maps.models import *
 from utils import send_assignment_email, increment_metric
 from geoq.training.models import Training

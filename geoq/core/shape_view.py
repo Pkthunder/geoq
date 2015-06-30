@@ -10,7 +10,7 @@ from django.utils.encoding import smart_str
 from django.views.generic import ListView
 
 from geoq.maps.models import AOI, Feature
-from models import Job
+from geoq.core.models import Job
 from cStringIO import StringIO
 
 from django.contrib.gis.gdal.libgdal import lgdal
