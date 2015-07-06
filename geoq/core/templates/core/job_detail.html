@@ -24,15 +24,20 @@
         ];
 
         var aoi_extents;
+        console.log("Before mapInit() call");
+        console.log('{{ object.geoJSON|default:'[]'|safe }}');
+        console.log({{ object.geoJSON|default:'[]'|safe }});
         function mapInit(map, bounds) {
+            console.log("Within mapInit() call");
             map_object = map;
             aoi_extents = L.geoJson({{ object.geoJSON|default:'[]'|safe }}, {
                 style: function(feature) {
+                    console.log("Within mapInit(), style() called");
                     var status = _.find(status_colors,function(stat){return stat.name==feature.properties.status});
                     return (status && status.color) ? status.color : '#ffffff';
                 },
                 onEachFeature: function(feature, layer) {
-
+                    console.log("Within mapInit(), onEachFeature() called");
                     job_properties = feature.properties;
                     {% if user.is_authenticated %}
                     var popupContent = _.template('{% filter escapejs %}{% include "core/job_detail_aoi_popup.html" %}{% endfilter %}', job_properties);
@@ -45,10 +50,12 @@
                     });
                 }
             }).addTo(map);
+            console.log("After mapInit() call");
 
             // Map doesn't update without this delay.
             setTimeout(function(){
                 try {
+                    console.log("setTimeout try block reached");
                     //AOI is sometimes getting no bounds data, which causes error
                     var test = aoi_extents.getBounds().getCenter();
                     map.fitBounds(aoi_extents.getBounds());

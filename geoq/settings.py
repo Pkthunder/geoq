@@ -110,7 +110,10 @@ LEAFLET_CSS = [
 
 LEAFLET_CONFIG = {
     'RESET_VIEW' : False,
-    'MAX_ZOOM' : 22,
+    'MAX_ZOOM' : 18,
+    'DEFAULT_ZOOM' : 14,
+    'SPATIAL_EXTENT' : (5.0, 44.0, 7.5, 46.0),
+    'DEFAULT_CENTER' : (6.0, 45.0),
     'PLUGINS': {
         'draw': {
             'css': LEAFLET_CSS,

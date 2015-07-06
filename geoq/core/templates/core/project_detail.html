@@ -7,6 +7,49 @@
     {% leaflet_js %}
 
     <script type="text/javascript">
+    console.log({{ object.aois_envelope.json|safe }});
+
+    /*Testing
+    setTimeout( function() {
+        //$("#map").removeClass("leaflet-fade-anim");
+        console.log("finished");
+    }, 5000 );
+    */
+
+    /*
+    $(window).on('map:init', function(e) {
+        console.log("Map Init ran!");
+        var detail = e.originalEvent ? e.originalEvent.detail : e.detail;
+        console.log(e.originalEvent);
+        console.log(e.detail);
+
+        //L.marker([50.5, 30.5]).addTo(detail.map);
+
+        //var drawnItems = new L.FeatureGroup();
+        //console.log(drawnItems);
+		//detail.map.addLayer(drawnItems);
+		console.log({{ object.aois_envelope.json|safe }});
+
+        var test = L.geoJson( {{object.aois_envelope.json|safe}} ).addTo(detail.map);
+        console.log(test);
+        console.log(test.getBounds());
+        //detail.map.fitBounds(test.getBounds());
+
+        setTimeout( function() {
+           console.log("k-k-k-k-callback!");
+           detail.map.fitBounds(test.getBounds());
+        }, 100 );
+        console.log("end of func");
+
+		//Testing Map Loading
+		//var testCity = new L.LatLng(51.505, 15.052);
+		//var stuff = new L.TileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18} );
+	    //detail.map.setView(testCity, 14);
+	    //detail.map.setCenter(testCity);
+    });
+    */
+
+    /*
     function mapInit(map, bounds) {
 
         var extentStyle = {
@@ -42,19 +85,25 @@
             aoi_extents.addTo(map);
         }
 
+        console.log("Before TimeOut!");
         // Map doesn't update without this delay.
         setTimeout(function(){
+            console.log("Inside TimeOut!");
             try {
+                console.log("Inside Try Block!");
+                console.log(aoi_extents.getBounds());
                 //AOI is sometimes getting no bounds data, which causes error
                 var test = aoi_extents.getBounds().getCenter();
+                console.log("var test = " + test);
                 map.fitBounds(aoi_extents.getBounds());
             } catch(ex){
+                console.log("Error within MapInit() in project_detail.html");
                 log.error("aoi_extents not being passed in valid bounds");
             }
         }, 1);
 
-
         var drawnItems = new L.FeatureGroup();
+        console.log(drawnItems);
 		map.addLayer(drawnItems);
 
 
@@ -64,7 +113,7 @@
         }).css({fontWeight:'bold'});
 
 
-    }
+    } */
 </script>
 
     {% compress css %}
@@ -109,6 +158,9 @@
                 {% endif %}
                 <div class="span6 thumbnail" id="map" style="height:260px; vertical-alignment:middle;">
                 {% leaflet_map "map" creatediv=False%}
+                    <script type="text/javascript">
+                        console.log("maps!");
+                    </script>
                 </div>
                 <div class="span5">
                     <table class="project_info_list">
