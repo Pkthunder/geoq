@@ -11,18 +11,7 @@
 
     $(window).on('map:init', function(e) {
         var detail = e.originalEvent ? e.originalEvent.detail : e.detail;
-
-        var aoi_extends = L.geoJson( {{object.aois_envelope.json|safe}} );
-
-        setTimeout( function() {
-            detail.map.fitBounds(aoi_extends.getBounds());
-            detail.map.setView(aoi_extends.getBounds().getCenter());
-            aoi_extends.addTo(detail.map);
-        }, 100 );
-    });
-
-    /*
-    function mapInit(map, bounds) {
+        var map = detail.map;
 
         var extentStyle = {
             "weight":2,
@@ -51,28 +40,21 @@
 
         });
 
-        //Build the extents and load that if above didn't work
         var aoi_extents = L.geoJson({{ object.aois_envelope.json|safe }},{style: extentStyle});
         if (!job_list || !job_list.length && aoi_extents) {
             aoi_extents.addTo(map);
         }
 
-        console.log("Before TimeOut!");
-        // Map doesn't update without this delay.
-        setTimeout(function(){
-            console.log("Inside TimeOut!");
+        setTimeout( function() {
             try {
-                console.log("Inside Try Block!");
-                console.log(aoi_extents.getBounds());
-                //AOI is sometimes getting no bounds data, which causes error
-                var test = aoi_extents.getBounds().getCenter();
-                console.log("var test = " + test);
-                map.fitBounds(aoi_extents.getBounds());
+                detail.map.fitBounds(aoi_extents.getBounds());
+                detail.map.setView(aoi_extents.getBounds().getCenter());
+                aoi_extents.addTo(detail.map);
             } catch(ex){
-                console.log("Error within MapInit() in project_detail.html");
                 log.error("aoi_extents not being passed in valid bounds");
             }
-        }, 1);
+
+        }, 100 );
 
         var drawnItems = new L.FeatureGroup();
         console.log(drawnItems);
@@ -83,9 +65,8 @@
         $('.job_feature_list td').filter(function() {
           return $(this).text() != '0';
         }).css({fontWeight:'bold'});
+    });
 
-
-    } */
 </script>
 
     {% compress css %}

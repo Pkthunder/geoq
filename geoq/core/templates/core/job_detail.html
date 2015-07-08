@@ -24,20 +24,22 @@
         ];
 
         var aoi_extents;
-        console.log("Before mapInit() call");
-        console.log('{{ object.geoJSON|default:'[]'|safe }}');
-        console.log({{ object.geoJSON|default:'[]'|safe }});
-        function mapInit(map, bounds) {
-            console.log("Within mapInit() call");
+
+        $(window).on('map:init', function(e) {
+            var detail = e.originalEvent ? e.originalEvent.detail : e.detail;
+            var map = detail.map;
             map_object = map;
+
+            getTwitterJSON();
+            //console.log(map_object.getBounds());
+            //console.log(map_object.getBounds().toBBoxString());
+
             aoi_extents = L.geoJson({{ object.geoJSON|default:'[]'|safe }}, {
                 style: function(feature) {
-                    console.log("Within mapInit(), style() called");
                     var status = _.find(status_colors,function(stat){return stat.name==feature.properties.status});
                     return (status && status.color) ? status.color : '#ffffff';
                 },
                 onEachFeature: function(feature, layer) {
-                    console.log("Within mapInit(), onEachFeature() called");
                     job_properties = feature.properties;
                     {% if user.is_authenticated %}
                     var popupContent = _.template('{% filter escapejs %}{% include "core/job_detail_aoi_popup.html" %}{% endfilter %}', job_properties);
@@ -50,12 +52,10 @@
                     });
                 }
             }).addTo(map);
-            console.log("After mapInit() call");
 
             // Map doesn't update without this delay.
             setTimeout(function(){
                 try {
-                    console.log("setTimeout try block reached");
                     //AOI is sometimes getting no bounds data, which causes error
                     var test = aoi_extents.getBounds().getCenter();
                     map.fitBounds(aoi_extents.getBounds());
@@ -111,7 +111,7 @@
             };
             var titleInfoButton = new L.Control.Button(titleInfoOptions).addTo(map);
 
-        }
+        });
 
         function highlightFeature(e) {
             var layer = e.target;
@@ -168,6 +168,42 @@
         $map.height(height);
         $att.css('marginBottom','20px');
     });
+
+    function getTwitterJSON() {
+        //Index order: a-token, a-secret, c-token, c-secret
+        var oauth = {{twitter_tokens|safe}};
+        console.log(map_object.getBounds());
+        var locale = map_object.getBounds().toBBoxString();
+        console.log(locale);
+        var twitter_results = {{twitter_results|safe}};
+        console.log(twitter_results);
+
+        var requestHeader = {
+                                Authorization: "OAuth",
+                                oauth_consumer_key : "ZuPoSR6v2UW9RRUM3jVNy4lXQ",
+                                oauth_nonce : "c73a14028a237876041d29740a084229",
+                                oauth_signature : "MMMk1ke5CFZG0rLrGr9h%2BmmsF8g%3D",
+                                oauth_signature_method : "HMAC-SHA1",
+                                oauth_timestamp : "1436380059",
+                                oauth_token : "3248261306-H77EHvXe48pbWdmzUawfoRhgGxQDm2VKFlnfacW",
+                                oauth_version : "1.0"
+                             };
+        /*
+        $.ajax({
+            method : "GET",
+            url : "https://stream.twitter.com/1.1/statuses/" +
+                        "filter.json?locations=" + locale + "&result_type=recent",
+            dataType : "jsonp",
+            cache : false,
+            crossDomain : true,
+            headers : requestHeader,
+            success : function( data ) {
+                        console.log(data);
+                    }
+        }).error( function() {
+            console.log("error getting twitter json");
+        }); */
+    }
 
     </script>
     <style>

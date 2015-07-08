@@ -242,6 +242,7 @@ INSTALLED_APPS = (
 
     #OAuth
     #'oauth2_provider',
+    'twython',
 
 )
 
@@ -295,6 +296,15 @@ BOOTSTRAP_JS_BASE_URL = BOOTSTRAP_BASE_URL + 'js/'
 BOOTSTRAP_JS_URL =  BOOTSTRAP_JS_BASE_URL + 'bootstrap.min.js'
 BOOTSTRAP_CSS_BASE_URL = BOOTSTRAP_BASE_URL + 'css/'
 BOOTSTRAP_CSS_URL = BOOTSTRAP_CSS_BASE_URL + 'bootstrap.css'
+
+# Twitter's OAuth Generated Key's for @K83C_Interns
+TWITTER_ACCESS_TOKEN = '3248261306-H77EHvXe48pbWdmzUawfoRhgGxQDm2VKFlnfacW'
+TWITTER_ACCESS_SECRET = 'vTrQ1DrMzAfe2GXeNycVc6oagaz3JDGW5EweinnZytZhZ'
+TWITTER_CONSUMER_TOKEN = 'ZuPoSR6v2UW9RRUM3jVNy4lXQ'
+TWITTER_CONSUMER_SECRET = 'dMDpqXNxbcCwmTJQSAYCJkFfStpotj8ZDcka1CWbUmwdTzieK6'
+
+# Twython Configurations
+
 
 # Override production settings with local settings if they exist
 try:

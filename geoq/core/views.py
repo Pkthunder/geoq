@@ -18,6 +18,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import DetailView, ListView, TemplateView, View, DeleteView, CreateView, UpdateView
 from datetime import datetime
 
+from django.conf import settings
+from geoq.core.twitterstream import TwitterStream
+
 from geoq.core.models import Project, Job, AOI, Comment, AssigneeType, Organization
 from geoq.maps.models import *
 from utils import send_assignment_email, increment_metric
@@ -389,6 +392,14 @@ class JobDetailedListView(ListView):
         #TODO: Add feature_count
 
         cv['completed'] = cv['object'].complete_percent()
+        cv['twitter_tokens'] = []
+        cv['twitter_tokens'].append(settings.TWITTER_ACCESS_TOKEN)
+        cv['twitter_tokens'].append(settings.TWITTER_ACCESS_SECRET)
+        cv['twitter_tokens'].append(settings.TWITTER_CONSUMER_TOKEN)
+        cv['twitter_tokens'].append(settings.TWITTER_CONSUMER_SECRET)
+
+        cv['twitter_results'] = []
+        # Twitter API Testing...
 
         return cv
 
